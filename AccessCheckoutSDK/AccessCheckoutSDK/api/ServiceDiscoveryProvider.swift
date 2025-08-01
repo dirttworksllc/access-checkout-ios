@@ -51,8 +51,12 @@ class ServiceDiscoveryProvider {
                 guard let discoveryResponse = response else { return }
 
                 ServiceDiscoveryProvider.baseDiscoveryResponse = discoveryResponse
-
+                NSLog(
+                    "ServiceDiscoveryProvider: Base discovery response fetched successfully."
+                )
+                
                 self.sessionsDiscovery(baseDiscoveryResponse: discoveryResponse)
+
             }
             completionHandler()
         }
@@ -93,6 +97,13 @@ class ServiceDiscoveryProvider {
 
             ServiceDiscoveryProvider.sessionsCvcEndpoint = self.apiResponseLinkLookup.lookup(
                 link: ApiLinks.cvcSessions.endpoint, in: discoveryResponse)
+            
+            NSLog(
+                "ServiceDiscoveryProvider: Sessions card enpoint discovered: \(ServiceDiscoveryProvider.sessionsCardEndpoint!)"
+            )
+            NSLog(
+                "ServiceDiscoveryProvider: Sessions CVC enpoint discovered: \(ServiceDiscoveryProvider.sessionsCvcEndpoint!)"
+            )
         }
     }
 
