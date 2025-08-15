@@ -7,43 +7,6 @@
   },
   "interactions": [
     {
-      "description": "GET request to /sessions to discover card session endpoint",
-      "request": {
-        "method": "get",
-        "path": "/sessions",
-        "headers": {
-          "content-type": "application/vnd.worldpay.sessions-v1.hal+json",
-          "Accept": "application/vnd.worldpay.sessions-v1.hal+json"
-        }
-      },
-      "response": {
-        "status": 200,
-        "headers": {
-          "Content-Type": "application/vnd.worldpay.sessions-v1.hal+json"
-        },
-        "body": {
-          "_links": {
-            "sessions:card": {
-              "href": "http://pacttest/sessions/card"
-            },
-            "sessions:paymentsCvc": {
-              "href": "http://pacttest/sessions/payments/cvc"
-            }
-          }
-        },
-        "matchingRules": {
-          "$.body._links.sessions:card.href": {
-            "match": "regex",
-            "regex": "https?:\\/\\/[^\\/]+\\/sessions\\/card"
-          },
-          "$.body._links.sessions:paymentsCvc.href": {
-            "match": "regex",
-            "regex": "https?:\\/\\/[^\\/]+\\/sessions\\/payments\\/cvc"
-          }
-        }
-      }
-    },
-    {
       "description": "POST request to /sessions/card with PAN that does not pass Luhn check",
       "request": {
         "method": "post",
@@ -224,43 +187,6 @@
       }
     },
     {
-      "description": "GET request to /sessions to discover cvc session endpoint",
-      "request": {
-        "method": "get",
-        "path": "/sessions",
-        "headers": {
-          "Accept": "application/vnd.worldpay.sessions-v1.hal+json",
-          "content-type": "application/vnd.worldpay.sessions-v1.hal+json"
-        }
-      },
-      "response": {
-        "status": 200,
-        "headers": {
-          "Content-Type": "application/vnd.worldpay.sessions-v1.hal+json"
-        },
-        "body": {
-          "_links": {
-            "sessions:card": {
-              "href": "http://pacttest/sessions/card"
-            },
-            "sessions:paymentsCvc": {
-              "href": "http://pacttest/sessions/payments/cvc"
-            }
-          }
-        },
-        "matchingRules": {
-          "$.body._links.sessions:card.href": {
-            "match": "regex",
-            "regex": "https?:\\/\\/[^\\/]+\\/sessions\\/card"
-          },
-          "$.body._links.sessions:paymentsCvc.href": {
-            "match": "regex",
-            "regex": "https?:\\/\\/[^\\/]+\\/sessions\\/payments\\/cvc"
-          }
-        }
-      }
-    },
-    {
       "description": "POST request to /sessions/payments/cvc with invalid identity in body",
       "request": {
         "method": "post",
@@ -301,6 +227,43 @@
       }
     },
     {
+      "description": "GET request to /sessions to discover sessions endpoints",
+      "request": {
+        "method": "get",
+        "path": "/sessions",
+        "headers": {
+          "Accept": "application/vnd.worldpay.sessions-v1.hal+json",
+          "content-type": "application/vnd.worldpay.sessions-v1.hal+json"
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/vnd.worldpay.sessions-v1.hal+json"
+        },
+        "body": {
+          "_links": {
+            "sessions:card": {
+              "href": "http://localhost:1234/sessions/card"
+            },
+            "sessions:paymentsCvc": {
+              "href": "http://localhost:1234/sessions/payments/cvc"
+            }
+          }
+        },
+        "matchingRules": {
+          "$.body._links.sessions:card.href": {
+            "match": "regex",
+            "regex": "https?:\\/\\/[^\\/]+\\/sessions\\/card"
+          },
+          "$.body._links.sessions:paymentsCvc.href": {
+            "match": "regex",
+            "regex": "https?:\\/\\/[^\\/]+\\/sessions\\/payments\\/cvc"
+          }
+        }
+      }
+    },
+    {
       "description": "POST request to /sessions/card with valid body",
       "request": {
         "method": "post",
@@ -327,7 +290,7 @@
         "body": {
           "_links": {
             "sessions:session": {
-              "href": "http://pacttest/sessions/sampleSessionID"
+              "href": "http://localhost:1234/sessions/sampleSessionID"
             }
           }
         },
@@ -361,7 +324,7 @@
         "body": {
           "_links": {
             "sessions:session": {
-              "href": "http://pacttest/sessions/sessionURI"
+              "href": "http://localhost:1234/sessions/sessionURI"
             }
           }
         },
