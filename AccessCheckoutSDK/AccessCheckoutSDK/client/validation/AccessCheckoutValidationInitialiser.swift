@@ -58,7 +58,14 @@ public struct AccessCheckoutValidationInitialiser {
         )
         setTextFieldDelegate(textField: config.cvc!.uiTextField, delegate: cvcPresenter)
 
-        ServiceDiscoveryProvider.discover(baseUrl: config.accessBaseUrl) { result in }
+        ServiceDiscoveryProvider.discover(baseUrl: config.accessBaseUrl) { result in
+            switch result {
+            case .success:
+                NSLog("Card bin endpoint discovered: \(ServiceDiscoveryProvider.getCardBinEndpoint() ?? "not found")")
+            case .failure(let error):
+                NSLog("Failed to discover card bin endpoint: \(error.localizedDescription)")
+            }
+        }
     }
 
     private func initialiseForCvcOnlyFlow(_ config: CvcOnlyValidationConfig) {
